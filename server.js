@@ -14,29 +14,50 @@ app.use(cors({optionsSuccessStatus: 200}));  // some legacy browsers choke on 20
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
 
-app.get("/", function (req, res) {
-  console.log({greeting: 'hello API'})
-  res.sendFile(__dirname + '/views/index.html');
-});
 
 // http://expressjs.com/en/starter/basic-routing.html
 app.get("/", function (req, res) {
-  console.log({greeting: 'hello API'})
   res.sendFile(__dirname + '/views/index.html');
 });
 
-
-// your first API endpoint...
-app.get("/api/hello", function (req, res) {
-  res.json({greeting: 'hello API'});
+app.get("/api/timestamp", function (req, res) {
+  res.sendFile(__dirname + '/views/timestamp.html')
 });
+
+app.get("/api/requestHeaderParser", function (req, res) {
+  res.sendFile(__dirname + '/views/requestHeaderParser.html')
+});
+
+app.get("/api/timestamp", function (req, res) {
+  var now = new Date()
+  res.json ({
+    "unix":unixTime.getTime(),
+    "utc": unixTime.toUTCString()
+   });
+  });
 
 app.get("/api/timestamp/:date_string", function (req, res) {
   let dateString = req.params.date_string;
-  console.log(dateString);
-  res.json({"error" : "Invalid date"});
-});
 
+  if (parseInt(dateString) > 10000 ) {
+    let unixTime = new Date(parseInt(dateString));
+    res.json({
+      "unix":unixTime.getTime(),
+      "utc": unixTime.toUTCString()
+    });
+  }
+
+let passedInValue = new Date(dateString);
+
+if (passedInValue == new "Invalid Date") {
+  res.json({"error" : "Invalid Date" });
+} else {
+  res.json ({
+    "unix":unixTime.getTime(),
+    "utc": unixTime.toUTCString()
+  })
+}
+});
 
 // listen for requests :)
 var listener = app.listen(port, function () {
