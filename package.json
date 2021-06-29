@@ -7,20 +7,21 @@
 	},
 	"main": "server.js",
 	"scripts": {
-		"start": "node server.js"
+		"start": "node server.js",
+		"test": "node test.js"
 	},
 	"dependencies": {
 		"ejs": "^3.1.5",
-     "express": "^4.15.2",
+		"express": "^4.15.2",
 		"cors": "^2.8.0"
 	},
 	"devDependencies": {
-    "got": "^11.3.0",
-    "tape": "^4.7.0"
-  },
+		"got": "^11.3.0",
+		"tape": "^4.7.0"
+	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/ashishg321/userful-programmer-portfolio-app"
+		"url": "https://github.com/ashishg321/useful-programmers-portfolio-app"
 	},
 	"keywords": [
 		"node",
