@@ -14,6 +14,11 @@ app.use(cors({optionsSuccessStatus: 200}));  // some legacy browsers choke on 20
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
 
+app.get("/", function (req, res) {
+  console.log({greeting: 'hello API'})
+  res.sendFile(__dirname + '/views/index.html');
+});
+
 // http://expressjs.com/en/starter/basic-routing.html
 app.get("/", function (req, res) {
   console.log({greeting: 'hello API'})
@@ -26,6 +31,11 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+app.get("/api/timestamp/:date_string", function (req, res) {
+  let dateString = req.params.date_string;
+  console.log(dateString);
+  res.json({"error" : "Invalid date"});
+});
 
 
 // listen for requests :)
